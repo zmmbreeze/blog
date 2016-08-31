@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>create script demo</title>
+    <link rel="stylesheet" href="../g.css">
+</head>
+<body class="lang-zh">
+    <div id="exp1">
+        <h1>动态创建 script 方式加载JS脚本</h1>
+        <pre><code>&lt;script&gt;
+(function (url) {
+    var scrs = document.getElementsByTagName('script');
+    var last = scrs[scrs.length - 1];
+    var scr = document.createElement('script');
+    scr.src = url;
+    scr.async = true;
+    last.parentNode.insertBefore(scr, last);
+})('test.js');
+&lt;/script&gt;</code></pre>
+    </div>
+
+    <script>
+    (function (url) {
+        var scrs = document.getElementsByTagName('script');
+        var last = scrs[scrs.length - 1];
+        var scr = document.createElement('script');
+        scr.src = url;
+        scr.async = true;
+        last.parentNode.insertBefore(scr, last);
+    })('test.js');
+    </script>
+    <script src="./test.js" async></script>
+    <script src="../prettify.js"></script>
+    <script src="../g.js"></script>
+</body>
+</html>

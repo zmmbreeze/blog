@@ -1,0 +1,251 @@
+body {
+    margin: 2em;
+    line-height: 1.5;
+    font-size: 16px;
+    font-family: 'Helvetica Neue',Helvetica,Arial,serif;
+    color: #666;
+    background-color: #BBB;
+}
+a {
+    color: #069;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+p, div, pre {
+    margin: 1em 0;
+    padding: 0;
+}
+pre {
+    padding: 1em;
+    overflow: auto;
+}
+code {
+    font-size: 14px;
+    font-family: consolas,monaco,monospace,serif;
+}
+dd > code:before {
+    content: '`';
+}
+dd > code:after {
+    content: '`';
+}
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    line-height: 1em;
+    font-size: 1em;
+    font-weight: normal;
+}
+
+
+
+/* Example class */
+[id^="exp"] {
+    position: relative;
+    margin: 1em 0;
+    padding: 2em 1em 0;
+    background-color: white;
+    border-radius: 4px;
+}
+[id^="exp"]:after {
+    content: 'Example';
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: whiteSmoke;
+    color: #9DA0A4;
+    border-radius: 4px 0 4px 0;
+}
+[id^="exp"] pre {
+    margin: 1em -1em 0;
+    border-radius: 0 0 4px 4px;
+}
+[id^="exp"] p:first-child {
+    margin-top: 0;
+}
+[id^="exp"] dt:before {
+    content: '>> ';
+}
+#exp1:after {
+    content: 'Example 1';
+}
+#exp2:after {
+    content: 'Example 2';
+}
+#exp3:after {
+    content: 'Example 3';
+}
+#exp4:after {
+    content: 'Example 4';
+}
+#exp5:after {
+    content: 'Example 5';
+}
+#exp6:after {
+    content: 'Example 6';
+}
+#exp7:after {
+    content: 'Example 7';
+}
+#exp8:after {
+    content: 'Example 8';
+}
+#exp9:after {
+    content: 'Example 9';
+}
+#exp10:after {
+    content: 'Example 10';
+}
+#exp11:after {
+    content: 'Example 11';
+}
+#exp12:after {
+    content: 'Example 12';
+}
+
+
+
+/* chinese class */
+.zh,
+.cn {
+    font-family:"ff-tisa-web-pro-1","ff-tisa-web-pro-2",
+                "Lucida Grande",
+                "Hiragino Sans GB","Hiragino Sans GB W3",
+                "Microsoft YaHei",
+                "wenquanyi micro hei",
+                sans-serif;
+}
+
+
+
+/* code highlight theme */
+/* Tomorrow Night Eighties Theme */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+/* Pretty printing styles. Used with prettify.js. */
+/* SPAN elements with the classes below are added by prettyprint. */
+/* plain text */
+.pln {
+  color: #cccccc; }
+
+@media screen {
+  /* string content */
+  .str {
+    color: #99cc99; }
+
+  /* a keyword */
+  .kwd {
+    color: #cc99cc; }
+
+  /* a comment */
+  .com {
+    color: #999999; }
+
+  /* a type name */
+  .typ {
+    color: #6699cc; }
+
+  /* a literal value */
+  .lit {
+    color: #f99157; }
+
+  /* punctuation */
+  .pun {
+    color: #cccccc; }
+
+  /* lisp open bracket */
+  .opn {
+    color: #cccccc; }
+
+  /* lisp close bracket */
+  .clo {
+    color: #cccccc; }
+
+  /* a markup tag name */
+  .tag {
+    color: #f2777a; }
+
+  /* a markup attribute name */
+  .atn {
+    color: #f99157; }
+
+  /* a markup attribute value */
+  .atv {
+    color: #66cccc; }
+
+  /* a declaration */
+  .dec {
+    color: #f99157; }
+
+  /* a variable name */
+  .var {
+    color: #f2777a; }
+
+  /* a function name */
+  .fun {
+    color: #6699cc; } }
+/* Use higher contrast and text-weight for printable form. */
+@media print, projection {
+  .str {
+    color: #060; }
+
+  .kwd {
+    color: #006;
+    font-weight: bold; }
+
+  .com {
+    color: #600;
+    font-style: italic; }
+
+  .typ {
+    color: #404;
+    font-weight: bold; }
+
+  .lit {
+    color: #044; }
+
+  .pun, .opn, .clo {
+    color: #440; }
+
+  .tag {
+    color: #006;
+    font-weight: bold; }
+
+  .atn {
+    color: #404; }
+
+  .atv {
+    color: #060; } }
+/* Style */
+pre.prettyprint {
+  background: #2d2d2d;
+  font-family: Menlo, Monaco, Consolas, monospace; }
+
+/* Specify class=linenums on a pre to get line numbering */
+ol.linenums {
+  margin-top: 0;
+  margin-bottom: 0; }
+
+/* IE indents via margin-left */
+li.L0,
+li.L1,
+li.L2,
+li.L3,
+li.L4,
+li.L5,
+li.L6,
+li.L7,
+li.L8,
+li.L9 {
+  /* */ }
+
+/* Alternate shading for lines */
+li.L1,
+li.L3,
+li.L5,
+li.L7,
+li.L9 {
+  /* */ }
