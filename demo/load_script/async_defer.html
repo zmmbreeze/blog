@@ -4,17 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Async script</title>
+    <title>Async defer script</title>
     <link rel="stylesheet" href="../g.css">
 </head>
 <body class="lang-zh">
     <div id="exp1">
-        <h1>静态 async script 方式加载JS脚本</h1>
-        <pre><code>&lt;script src="./test.js" async&gt;&lt;/script&gt;</code></pre>
+        <h1>静态 async defer script 方式加载JS脚本</h1>
+        <pre><code>&lt;script src="./test.js" async defer&gt;&lt;/script&gt;</code></pre>
     </div>
 
-    <script src="./test.js" async></script>
+    <script src="./test.js" async defer></script>
     <script src="../prettify.js"></script>
     <script src="../g.js"></script>
+    <script>
+    if (window.console && window.console.log) {
+        window.console.log('end');
+    }
+    </script>
 </body>
 </html>

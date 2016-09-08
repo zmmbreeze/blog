@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>create script demo</title>
+    <title>动态创建 script</title>
     <link rel="stylesheet" href="../g.css">
 </head>
 <body class="lang-zh">
@@ -23,6 +23,11 @@
     </div>
 
     <script>
+    /*
+    var start = +new Date();
+    while ((start + 5000) > (+new Date())) {}
+    */
+
     (function (url) {
         var scrs = document.getElementsByTagName('script');
         var last = scrs[scrs.length - 1];
@@ -32,7 +37,6 @@
         last.parentNode.insertBefore(scr, last);
     })('test.js');
     </script>
-    <script src="./test.js" async></script>
     <script src="../prettify.js"></script>
     <script src="../g.js"></script>
 </body>

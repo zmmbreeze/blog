@@ -11,28 +11,103 @@
     <div id="exp1">
         <h1>Friendly iframe 方式加载JS脚本</h1>
         <pre><code>&lt;script&gt;
-(function (url) {
-    var scrs = document.getElementsByTagName('script');
-    var last = scrs[scrs.length - 1];
-    var scr = document.createElement('script');
-    scr.src = url;
-    scr.async = true;
-    last.parentNode.insertBefore(scr, last);
+(function(url){
+    // 第一部分
+    var iframe = document.createElement('iframe');
+    iframe.src = 'javascript:false';
+    // 在屏幕阅读器中隐藏iframe
+    iframe.title = '';
+    iframe.role='presentation';
+
+    iframe.frameBorder = '0';
+    iframe.tabIndex = '-1';
+    (iframe.frameElement || iframe).style.cssText = 'position:absolute;width:0;height:0;border:0;';
+
+    var where = document.getElementsByTagName('script');
+    where = where[where.length - 1];
+    where.parentNode.insertBefore(iframe, where);
+
+    // 第二部分
+    var domain;
+    var doc;
+    try {
+        doc = iframe.contentWindow.document;
+    } catch(e) {
+        domain = document.domain;
+        iframe.src='javascript:var d=document.open();d.domain="' + domain + '";void(0);';
+        // 如果当前页面修改过document.domain
+        // 那么会报“拒绝访问”的错误
+        // 只有IE会进入到此处
+        iframe.src = 'javascript:void((function () {'
+            + 'document.open("text/html", "replace");'
+            + 'document.domain = "' + domain + '";'
+            + 'document.close();'
+            + '})())';
+        doc = iframe.contentWindow.document;
+    }
+    doc.open('text/html', 'replace')._M_ = function() {
+        if (domain) {
+            this.domain = domain;
+        }
+
+        var scr = this.createElement('script');
+        scr.src = url;
+        this.body.appendChild(scr);
+    };
+    doc.write('&lt;body onload="document._M_();"&gt;');
+    doc.close();
 })('test.js');
 &lt;/script&gt;</code></pre>
     </div>
 
     <script>
-    (function (url) {
-        var scrs = document.getElementsByTagName('script');
-        var last = scrs[scrs.length - 1];
-        var scr = document.createElement('script');
-        scr.src = url;
-        scr.async = true;
-        last.parentNode.insertBefore(scr, last);
+    (function(url){
+        // 第一部分
+        var iframe = document.createElement('iframe');
+        iframe.src = 'javascript:false';
+        // 在屏幕阅读器中隐藏iframe
+        iframe.title = '';
+        iframe.role='presentation';
+
+        iframe.frameBorder = '0';
+        iframe.tabIndex = '-1';
+        (iframe.frameElement || iframe).style.cssText = 'position:absolute;width:0;height:0;border:0;';
+
+        var where = document.getElementsByTagName('script');
+        where = where[where.length - 1];
+        where.parentNode.insertBefore(iframe, where);
+
+        // 第二部分
+        var domain;
+        var doc;
+        try {
+            doc = iframe.contentWindow.document;
+        } catch(e) {
+            domain = document.domain;
+            iframe.src='javascript:var d=document.open();d.domain="' + domain + '";void(0);';
+            // 如果当前页面修改过document.domain
+            // 那么会报“拒绝访问”的错误
+            // 只有IE会进入到此处
+            iframe.src = 'javascript:void((function () {'
+                + 'document.open("text/html", "replace");'
+                + 'document.domain = "' + domain + '";'
+                + 'document.close();'
+                + '})())';
+            doc = iframe.contentWindow.document;
+        }
+        doc.open('text/html', 'replace')._M_ = function() {
+            if (domain) {
+                this.domain = domain;
+            }
+
+            var scr = this.createElement('script');
+            scr.src = url;
+            this.body.appendChild(scr);
+        };
+        doc.write('<body onload="document._M_();">');
+        doc.close();
     })('test.js');
     </script>
-    <script src="./test.js" async></script>
     <script src="../prettify.js"></script>
     <script src="../g.js"></script>
 </body>
