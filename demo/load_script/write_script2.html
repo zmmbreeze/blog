@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>document.write script demo</title>
+    <link rel="stylesheet" href="../g.css">
+    <script src="../prettify.js"></script>
+</head>
+<body class="lang-zh">
+    <div id="exp1">
+        <h1>document.write script 方式加载JS脚本</h1>
+        <pre><code>&lt;script&gt;
+document.write('&lt;script src="./test.js?' + (+new Date()) + '"&gt;&lt;/' + 'script&gt;');
+&lt;/script&gt;</code></pre>
+    </div>
+
+    <script>
+    document.write('<script src="./test.js?' + (+new Date()) + '"></' + 'script>');
+    </script>
+    <script src="../g.js"></script>
+</body>
+</html>

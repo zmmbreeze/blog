@@ -4,4 +4,8 @@
         pres[i].className = 'prettyprint';
     }
     prettyPrint();
+
+    if (window.console && window.console.log) {
+        window.console.log('g.js loaded');
+    }
 })();
