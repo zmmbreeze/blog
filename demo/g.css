@@ -107,6 +107,14 @@ h1, h2, h3, h4, h5, h6 {
     content: 'Example 12';
 }
 
+/* note style */
+.note {
+    padding: 1em;
+    color: #333;
+    background: #D9F7DF;
+    border-radius: 5px;
+}
+
 
 
 /* chinese class */
