@@ -2,10 +2,10 @@
 
 ## GA源代码里的小技巧系列
 
-- [x] [GA源代码里的小技巧之JS错误监控](https://github.com/zmmbreeze/blog/issues/23)
-- [x] [GA源代码里的小技巧之cookie篇](https://github.com/zmmbreeze/blog/issues/22)
-- [x] [GA源代码里的小技巧之preview和prerender](https://github.com/zmmbreeze/blog/issues/21)
-- [x] [GA源代码里的小技巧之Beacon请求](https://github.com/zmmbreeze/blog/issues/20)
+- [GA源代码里的小技巧之Beacon请求](https://github.com/zmmbreeze/blog/issues/20)
+- [GA源代码里的小技巧之preview和prerender](https://github.com/zmmbreeze/blog/issues/21)
+- [GA源代码里的小技巧之cookie篇](https://github.com/zmmbreeze/blog/issues/22)
+- [GA源代码里的小技巧之JS错误监控](https://github.com/zmmbreeze/blog/issues/23)
 
 ## 第三方脚本开发系列
 
