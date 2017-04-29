@@ -1,0 +1,11 @@
+<script>
+function loadScript(url) {
+    var scrs = document.getElementsByTagName('script');
+    var last = scrs[scrs.length - 1];
+    var scr = document.createElement('script');
+    scr.src = url;
+    scr.async = true;
+    last.parentNode.insertBefore(scr, last);
+}
+loadScript('sdk.js');
+</script>
