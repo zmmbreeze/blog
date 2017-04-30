@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>localStorage IE9新会话测试</title>
+    <link rel="stylesheet" href="../g.css">
+    <script src="../prettify.js"></script>
+</head>
+<body class="lang-zh">
+    <div>
+        <h1>localStorage IE9新会话测试</h1>
+        <div id="message"></div>
+        <p>
+            <select id="selColor" onkeyup="changeColor(this.value);" onchange="changeColor(this.value);" style="width:195px">
+                <option value=""></option>
+                <option value="blue">Blue</option>
+                <option value="red">Red</option>
+                <option value="yellow">Yellow</option>
+                <option value="green">Green</option>
+                <option value="gray">Gray</option>
+                <option value="orange">Orange</option>
+            </select>
+        </p>
+    </div>
+    <script src="../g.js"></script>
+    <script>
+    function checkColor(){
+        if (window.localStorage) {
+            document.getElementById('message').innerHTML = '<a href="http://msdn.microsoft.com/en-us/library/cc848902(VS.85).aspx">localStorage</a> says color is: ' + localStorage.color;
+        }
+        else {
+            document.getElementById('message').innerHTML = 'This browser does not support <a href="http://msdn.microsoft.com/en-us/library/cc848902(VS.85).aspx">localStorage</a>.';
+        }
+
+        if (localStorage.color){
+            document.body.style.backgroundColor = localStorage.color;
+        }
+        else {
+            document.body.style.backgroundColor = 'white';
+        }
+    }
+
+    function changeColor(sColor){
+        if (sColor == ''){
+            if (window.localStorage) {
+                window.localStorage.color = 'none';
+            }
+            document.body.style.backgroundColor = 'white';
+        }
+        else {
+            if (window.localStorage) {
+                window.localStorage.color = sColor;
+            }
+            document.body.style.backgroundColor = sColor;
+        }
+    }
+
+    checkColor();
+    setInterval(checkColor, 500);
+    </script>
+</body>
+</html>

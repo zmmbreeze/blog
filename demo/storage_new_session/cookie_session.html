@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>cookie IE9新会话测试</title>
+    <link rel="stylesheet" href="../g.css">
+    <script src="../prettify.js"></script>
+</head>
+<body class="lang-zh">
+    <div>
+            <h1>cookie IE9新会话测试</h1>
+        <div id="message"></div>
+        <p>
+            <select id="selColor" onkeyup="changeColor(this.value);" onchange="changeColor(this.value);" style="width:195px">
+                <option value=""></option>
+                <option value="blue">Blue</option>
+                <option value="red">Red</option>
+                <option value="yellow">Yellow</option>
+                <option value="green">Green</option>
+                <option value="gray">Gray</option>
+                <option value="orange">Orange</option>
+            </select>
+        </p>
+    </div>
+    <script src="../g.js"></script>
+    <script>
+
+    /**
+     * Get raw cookie value.
+     *
+     * @param {string} key key name.
+     * @param {Window=} win window context.
+     * @return {Array.<string>} cookie value array.
+     */
+    var getRaw = function (key, win) {
+        win = win || window;
+        var result = [];
+        var cookies = win.document.cookie.split(';');
+        var regex = new RegExp('^\\s*' + key + '=\\s*(.*?)\\s*$');
+        for (var i = 0; i < cookies.length; i++) {
+            var r = cookies[i].match(regex);
+            if (r) {
+                result[result.length] = win.decodeURIComponent(r[1]);
+            }
+        }
+        return result;
+    };
+    /**
+     * Set raw cookie.
+     *
+     * @param {string} key cookie name.
+     * @param {string} value cookie value.
+     * @param {Window=} win window context.
+     * @param {number=} expires cookie expired time in milliseconds.
+     * @param {string=} domain cookie domain.
+     * @param {string=} path cookie path.
+     * @return {boolean} success or not.
+     */
+    var setRaw = function (key, value, win, expires, domain, path) {
+        win = win || window;
+        value = win.encodeURIComponent(value);
+        var newCookie = key + '=' + value + '; ';
+
+        if (path != null) {
+            newCookie += 'path=' + path + '; ';
+        }
+
+        if (expires != null) {
+            var date = new Date();
+            date.setTime(date.getTime() + expires);
+            newCookie += 'expires=' + date.toGMTString() + '; ';
+        }
+
+        if (domain != null) {
+            newCookie += 'domain=' + domain + ';';
+        }
+
+        var doc = win.document;
+        var oldCookie = doc.cookie;
+        doc.cookie = newCookie;
+
+        if (oldCookie === doc.cookie) {
+            var values = getRaw(key);
+            for (var i = 0; i < values.length; i++) {
+                if (value === values[i]) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        return true;
+    };
+
+    function checkColor() {
+        const color = getRaw('color')[0];
+        document.getElementById('message').innerHTML
+            = '<a href="http://msdn.microsoft.com/en-us/library/cc848902(VS.85).aspx">cookie</a> says color is: ' + (color || 'none');
+
+        if (color){
+            document.body.style.backgroundColor = color;
+        }
+        else {
+            document.body.style.backgroundColor = 'white';
+        }
+    }
+
+    function changeColor(sColor){
+        if (sColor == '') {
+            setRaw('color', 'none');
+            document.body.style.backgroundColor = 'white';
+        }
+        else {
+            setRaw('color', sColor);
+            document.body.style.backgroundColor = sColor;
+        }
+    }
+
+    checkColor();
+    setInterval(checkColor, 500);
+    </script>
+</body>
+</html>
