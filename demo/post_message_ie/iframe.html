@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>postMessage测试</title>
+    <link rel="stylesheet" href="../g.css">
+    <style>
+    body {
+        background: #FFF;
+    }
+    #message {
+        padding: 10px;
+        background: #FFF;
+        border: 1px solid #CCC;
+    }
+    #message p {
+        padding: 5px;
+        background: #40c057;
+        border-radius: 2px;
+    }
+    </style>
+    <script src="../prettify.js"></script>
+</head>
+<body class="lang-zh">
+    <div>
+        <div id="message">
+            <p>这里显示接收到的消息:</p>
+        </div>
+        <div>
+            <button onclick="sendMessageToParent()">发送信息给parent</button>
+        </div>
+    </div>
+    <script src="../g.js"></script>
+    <script>
+    var LISTENER_EXPANDO = 'LISTENER_EXPANDO';
+    /**
+     * 为目标元素添加事件监听器
+     * @param {Element|Window|Document} element 目标元素或目标元素id
+     * @param {string} type 事件类型
+     * @param {Function} listener 需要添加的监听器
+     *  1. 不支持跨浏览器的鼠标滚轮事件监听器添加<br>
+     *  2. 改方法不为监听器灌入事件对象，以防止跨iframe事件挂载的事件对象获取失败
+     * @return {Element|Window} 目标元素
+     */
+    var on = function (element, type, listener) {
+        type = type.replace(/^on/i, '');
+        var realListener = function (ev) {
+            // 1. 这里不支持EventArgument,  原因是跨frame的事件挂载
+            // 2. element是为了修正this
+            listener.call(element, ev);
+        };
+        var realType = type;
+        type = type.toLowerCase();
+
+        // 事件监听器挂载
+        if (element.addEventListener) {
+            element.addEventListener(realType, realListener, false);
+        }
+        else if (element.attachEvent) {
+            element.attachEvent('on' + realType, realListener);
+        }
+
+        // 将监听器存储到数组中
+        var listeners = element[LISTENER_EXPANDO] = element[LISTENER_EXPANDO] || [];
+        listeners[listeners.length] = [type, listener, realListener, realType];
+        return element;
+    };
+
+    var showMessage = function (msg) {
+        var p = document.createElement('p');
+        p.innerHTML = msg;
+        document.getElementById('message').appendChild(p);
+    };
+
+    function sendMessage(win, msg) {
+        (win || window).postMessage(msg, '*');
+    }
+
+    function listenMessage(win) {
+        on(win || window, 'message', function (e) {
+            showMessage('[' + e.origin + ']' + e.data);
+        });
+    }
+    listenMessage();
+
+    function sendMessageToParent() {
+        sendMessage(window.parent, '来自iframe的消息');
+    }
+    </script>
+</body>
+</html>
