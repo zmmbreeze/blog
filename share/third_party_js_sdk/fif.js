@@ -1,9 +1,6 @@
 (function(url){
     // 第一部分
-    var dom;
-    var doc;
-    var where;
-    var iframe = document.createElement('iframe');
+    var dom, doc, where, iframe = document.createElement('iframe');
     iframe.src = 'javascript:false';
     iframe.title = '';
     iframe.role = 'presentation';
@@ -25,9 +22,10 @@
     }
     doc.open()._l = function() {
         var js = this.createElement('script');
-        if(dom) this.domain = dom;
+        if (dom) this.domain = dom;
         js.id = 'js-iframe-async';
         js.src = url;
+        this.inDapIF = true;
         this.body.appendChild(js);
     };
     doc.write('<body onload="document._l();">');
