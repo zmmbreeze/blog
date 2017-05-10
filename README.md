@@ -11,6 +11,7 @@
 
 - [加载第三方JS的各种姿势](https://github.com/zmmbreeze/blog/issues/19)
 - [第三方Javascript开发系列之投放代码](https://github.com/zmmbreeze/blog/issues/18)
+- [第三方Javascript开发系列之前后端接口协议](https://github.com/zmmbreeze/blog/issues/25)
 
 ## CSS性能系列
 
