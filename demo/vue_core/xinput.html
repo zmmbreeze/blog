@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue `x-input` component</title>
+    <link rel="stylesheet" href="../g.css">
+    <script src="../prettify.js"></script>
+</head>
+<body class="lang-zh">
+    <h1>`x-input` component</h1>
+    <div id="demo"></div>
+
+    <script>
+    document.write('<script src="./test.js"></' + 'script>');
+    </script>
+    <script src="../g.js"></script>
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+Vue.component('XInput', {
+    template: '<span class="x-input">'
+        + '<input class="x-input__txt" v-model="currentValue"></input>'
+        + '{{count}}'
+        + '</span>',
+    props: {
+        value: [String, Number]
+    },
+    data() {
+        return {
+            currentValue: this.value
+        };
+    },
+    watch: {
+        value: function(nextValue) {
+            this.currentValue = nextValue;
+        },
+        currentValue: function(nextValue) {
+            this.$emit('input', nextValue);
+        }
+    },
+    computed: {
+        count: function() {
+            return this.currentValue.length;
+        }
+    }
+});
+var app = new Vue({
+    el: '#demo',
+    data: {
+        value: ''
+    },
+    template: '<x-input :value="value"></x-input>'
+});
+    </script>
+</body>
+</html>
