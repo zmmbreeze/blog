@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue perf test</title>
+</head>
+<body class="lang-zh">
+    <h1>Vue perf test</h1>
+    <div id="app">
+        <el-button @click="visible = true">按钮</el-button>
+        <el-dialog v-model="visible" title="Hello world">
+            <p>欢迎使用 Element</p>
+        </el-dialog>
+    </div>
+    <script src="../g.js"></script>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-default/index.css">
+    <script src="https://unpkg.com/vue"></script>
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script>
+    const getComponentPath = function(comp) {
+        const path = [comp.$options.name || '*'];
+        let parent = comp;
+        while (parent = parent.$parent) {
+            path.unshift(parent.$options.name || '*');
+        }
+        return `${comp._uid}:` + path.join(' > ');
+    };
+    Vue.mixin({
+        beforeCreate: function () {
+            console.log(`[BEFORE_CREATED][${performance.now()}] ${getComponentPath(this)}.`);
+        },
+        created: function () {
+            console.log(`[CREATED][${performance.now()}] ${getComponentPath(this)}.`);
+        }
+    });
+    new Vue({
+        el: '#app',
+        data: function(){
+            return { visible: false }
+        }
+    });
+    </script>
+</body>
+</html>
