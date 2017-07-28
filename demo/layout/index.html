@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Layout test</title>
+    <style>
+    .block {
+        background: #adb5bd;
+    }
+    .block:nth-child(2) {
+        background: #ff6b6b;
+    }
+    .block:nth-child(3) {
+        background: #f06595;
+    }
+    .block:nth-child(4) {
+        background: #cc5de8;
+    }
+    .block:nth-child(5) {
+        background: #845ef7;
+    }
+    .block:nth-child(6) {
+        background: #5c7cfa;
+    }
+    .block:nth-child(7) {
+        background: #329af0;
+    }
+    .block:nth-child(8) {
+        background: #22b8cf;
+    }
+    .block:nth-child(9) {
+        background: #20c997;
+    }
+
+    .block {
+        display: inline-block;
+        vertical-align: top;
+        width: 100px;
+        height: 100px;
+        margin: 5px;
+    }
+    .fix:after,
+    .fix:before {
+        content: '';
+        display: table;
+        clear: both;
+    }
+
+    /* 水平居中 */
+    .align-center-h {
+        text-align: center;
+    }
+
+    /* 垂直居中 */
+    /* 此方案不能子元素宽度100%
+    .align-center-v > div {
+        display: inline-block;
+        vertical-align: middle;
+        max-width: 99%;
+    }
+    .align-center-v:after {
+        content: '';
+        display: inline-block;
+        width: 0;
+        height: 100%;
+        vertical-align: middle;
+    }
+    */
+    .align-center-v {
+        position: relative;
+    }
+    .align-center-v > div {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+
+    /* 全居中 */
+    .align-center-v.align-center-h > div {
+        width: 100%;
+    }
+
+    .demo {
+        margin: 20px 0;
+        border: 1px solid #adb5bd;
+    }
+    </style>
+</head>
+<body class="lang-zh">
+    <h1>水平居中</h1>
+    <div class="demo align-center-h">
+        <div class="block"></div><div class="block"></div>
+    </div>
+    <div class="demo align-center-h">
+        <div class="block"></div><div class="block"></div><div class="block"></div>
+    </div>
+    <div class="demo align-center-h">
+        <div class="block"></div><div class="block"></div><div class="block"></div><div class="block"></div><div class="block"></div>
+    </div>
+
+    <h1>垂直居中</h1>
+    <div class="demo align-center-v" style="height: 400px;">
+        <div class="block"></div>
+    </div>
+    <div class="demo align-center-v" style="height: 400px;">
+        <div>
+            <div class="block"></div><div class="block"></div>
+        </div>
+    </div>
+
+    <h1>居中</h1>
+    <div class="demo align-center-h align-center-v" style="height: 400px;">
+        <div>
+        <!--
+            为了能让宽度超过50%，所以不能用left和translate的方法实现水平居中。
+            所以一定要加一个div来设置其为width:100%。
+        -->
+            <div class="block"></div>
+        </div>
+    </div>
+    <div class="demo align-center-h align-center-v" style="height: 400px;">
+        <div>
+            <div class="block"></div><div class="block"></div><div class="block"></div><div class="block"></div><div class="block"></div>
+        </div>
+    </div>
+
+    <div class="demo">
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+    </div>
+    <script src="../g.js"></script>
+</body>
+</html>
