@@ -7,6 +7,7 @@
     <title>Layout test</title>
     <style>
     .block {
+        text-align: center;
         background: #adb5bd;
     }
     .block:nth-child(2) {
@@ -76,7 +77,7 @@
         top: 50%;
         transform: translateY(-50%);
     }
-
+    
 
     /* 全居中 */
     .align-center-v.align-center-h > div {
@@ -86,6 +87,127 @@
     .demo {
         margin: 20px 0;
         border: 1px solid #adb5bd;
+    }
+    .demo > *:before {
+        position: absolute;
+        font-size: 20px;
+        color: #FFF;
+    }
+
+    /* 横向grid */
+    /* 基于calc的布局方法 */
+    .wrest200 {
+        width: calc(100% - 200px);
+    }
+    .wrest200:before {
+        content: 'calc(100% - 200px)';
+    }
+    .wrest500 {
+        width: calc(100% - 500px);
+    }
+    .wrest500:before {
+        content: 'calc(100% - 500px)';
+    }
+    .wrest500_1_3 {
+        width: calc((100% - 500px) / 3);
+    }
+    .wrest500_1_3:before {
+        content: 'calc((100% - 500px) / 3)';
+    }
+    .wrest500_2_3 {
+        width: calc((100% - 500px) * 2/ 3);
+    }
+    .wrest500_2_3:before {
+        content: 'calc((100% - 500px) * 2/ 3)';
+    }
+    .w100_300 {
+        width: auto;
+        min-width: 100px;
+        max-width: 300px;
+    }
+    .w100_300:before {
+        content: '100px - 300px;';
+    }
+    /* 基于table的布局方法 */
+    .tbl {
+        display: table;
+        table-layout: fixed;
+        width: 100%;
+    }
+    .tbl_auto {
+        display: table;
+        table-layout: auto;
+        width: 100%;
+    }
+    .tbl-cell {
+        display: table-cell;
+        width: auto;
+    }
+    .wrest300_1_3 {
+        width: calc((100% - 300px) / 3);
+    }
+    .wrest300_1_3:before {
+        content: 'calc((100% - 300px) / 3)';
+    }
+    .wrest300_2_3 {
+        width: calc((100% - 300px) * 2/ 3);
+    }
+    .wrest300_2_3:before {
+        content: 'calc((100% - 300px) * 2/ 3)';
+    }
+
+
+    .row {
+        margin: 0;
+        display: block;
+        width: auto;
+        height: auto;
+    }
+
+
+
+
+    .nomargin {
+        margin: 0;
+    }
+    .w200 {
+        width: 200px;
+    }
+    .w200:before {
+        content: '200px;';
+    }
+    .w300 {
+        width: 300px;
+    }
+    .w300:before {
+        content: '300px;';
+    }
+    .w100p {
+        width: 100%;
+    }
+    .w40p {
+        width: 40%;
+    }
+    .w60p {
+        width: 60%;
+    }
+    .w100p_3 {
+        width: calc(100% / 3);
+    }
+    .w100p_2_3 {
+        width: calc(100% * 2/ 3);
+    }
+    .h400 {
+        height: 400px;
+    }
+    .h100 {
+        height: 100px;
+    }
+    .h100_1_3 {
+        height: calc((100% - 100px) / 3);
+    }
+    .h100_2_3 {
+        height: calc((100% - 100px) * 2 / 3);
     }
     </style>
 </head>
@@ -127,6 +249,78 @@
         </div>
     </div>
 
+
+    <h1>基于calc的横向布局</h1>
+    <div class="demo">
+        <div class="block w200 nomargin"></div><div class="block wrest200 nomargin h400"></div>
+    </div>
+    <div class="demo">
+        <div class="block w200 nomargin"></div><div class="block wrest500 nomargin"></div><div class="block w300 nomargin"></div>
+    </div>
+    <div class="demo">
+        <div class="block w200 nomargin"></div><div class="block wrest500_1_3 nomargin"></div><div class="block wrest500_2_3 nomargin"></div><div class="block w300 nomargin"></div>
+    </div>
+    <div class="demo">
+        <div class="block w200 nomargin"></div><div class="block wrest500_1_3 nomargin"></div><div class="block w300 nomargin"></div><div class="block wrest500_2_3 nomargin"></div>
+    </div>
+
+    <h1>基于fixed table的横向布局</h1>
+    <div class="demo tbl">
+        <div class="block w200 tbl-cell nomargin"></div><div class="block tbl-cell nomargin h400"></div>
+    </div>
+    <div class="demo tbl">
+        <div class="block w200 tbl-cell nomargin"></div><div class="block tbl-cell nomargin"></div><div class="block tbl-cell w300 nomargin"></div>
+    </div>
+    <div class="demo tbl">
+        <div class="block w200 tbl-cell nomargin"></div><div class="block tbl-cell nomargin"><div class="block nomargin w100p_3"></div><div class="block nomargin w100p_2_3"></div></div><div class="block tbl-cell w300 nomargin"></div>
+    </div>
+    <div class="demo tbl">
+        <div class="block w200 tbl-cell nomargin"></div><div class="block tbl-cell nomargin">
+            <div class="tbl">
+                <div class="block tbl-cell wrest300_1_3 nomargin"></div><div class="block tbl-cell w300 nomargin"></div><div class="block tbl-cell wrest300_2_3 nomargin"></div>
+            </div>
+        </div>
+    </div>
+
+    <h1>基于auto table的横向布局</h1>
+    <div class="demo tbl_auto">
+        <div class="block tbl-cell nomargin">
+            <div class="w200"></div>
+        </div>
+        <div class="block tbl-cell nomargin w100p">
+            <div class="block w40p nomargin"></div><div class="block w60p nomargin"></div>
+        </div>
+    </div>
+    <div class="demo tbl_auto">
+        <div class="block tbl-cell nomargin">
+            <div class="w200"></div>
+        </div>
+        <div class="block tbl-cell nomargin w100p">
+            <div class="block w100p nomargin"><div class="w300"></div></div>
+        </div>
+        <div class="block tbl-cell nomargin">
+            <div class="block w300 nomargin"></div>
+        </div>
+    </div>
+
+    <h1>垂直方向的布局</h1>
+    <div class="demo h400">
+        <div class="row block h100"></div>
+        <div class="row block h100_1_3"></div>
+        <div class="row block h100_2_3"></div>
+    </div>
+
+
+    <h1>双纬度布局</h1>
+    <div class="demo tbl">
+        <div class="block tbl-cell w200 nomargin">
+            <div class="row block h100"></div>
+            <div class="row block h100_1_3"></div>
+            <div class="row block h100_2_3"></div>
+        </div><div class="block tbl-cell wrest200 nomargin h400"></div>
+    </div>
+
+    <h1>其他</h1>
     <div class="demo">
         <div class="block"></div>
         <div class="block"></div>
